@@ -7,8 +7,17 @@
   "author": "Cristóbal Sepúlveda <cristobal.sepulveda@outlook.com>",
   "license": "AGPL-3.0-only",
   "private": false,
+  "scripts": {
+    "start": "node ./dist/index.js",
+    "prestart": "tsc",
+    "dev": "ts-node-dev --respawn ./src/index.ts"
+  },
   "dependencies": {
+    "@types/cheerio": "^0.22.15",
     "@types/mongoose": "^5.5.36",
+    "axios": "^0.19.0",
+    "cheerio": "^1.0.0-rc.3",
+    "csv-parser": "^2.3.2",
     "dotenv": "^8.2.0",
     "mongoose": "^5.8.3",
     "ts-node-dev": "^1.0.0-pre.44",
