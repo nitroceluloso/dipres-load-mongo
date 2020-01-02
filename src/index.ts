@@ -1,4 +1,4 @@
 
-import { Main } from "./Main";
+import { App } from "./App";
 
-Main.init();
+App.init();

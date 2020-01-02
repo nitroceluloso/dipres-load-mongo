@@ -1,8 +1,12 @@
 
 import axios from "axios";
-import * as cheerio from "cheerio";
-import { log } from "../../common/logger";
-import { HtmlParserFactory } from "../html-parser/HtmlParser";
+import cheerio from "cheerio";
+import { log } from "../../common/logger/logger";
+import { HtmlParser } from "../html-parser/HtmlParser";
+
+import { Program } from "../program/Program";
+import { IProgram } from "../program/types";
+import { globalConfig } from "../../config";
 
 export class Scraper {
     url: string;
@@ -21,11 +25,20 @@ export class Scraper {
         return web("#tabla_programas_evaluados tbody tr").toArray();
     }
 
-    parseArrayToObject(rows: Array<any>) {
-        log("elements obtained: ", rows.length)
-        const factory = new HtmlParserFactory();
-        return rows.map((el) => {
-            return factory.parseHtml(el);
+    parseToProgram(rows: Array<any>): Array<Program> {
+        log("Total elements obtained: ", rows.length);
+        const registerPlains = rows.map((el) => {
+            return new HtmlParser(el).getObject();
         });
+
+        const cleanRegisters = registerPlains.filter((el: IProgram) => {
+            return el.year >= globalConfig.MINIMUM_YEAR;
+        });
+
+        log("Evaluated elements obtained: ", cleanRegisters.length);
+
+        return cleanRegisters.map((el: IProgram) => {
+            return new Program(el);
+        })
     }
 }

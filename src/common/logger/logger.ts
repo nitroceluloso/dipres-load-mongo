@@ -1,5 +1,6 @@
 
-import * as winston from "winston";
+import winston from "winston";
+import { globalConfig } from "../../config";
 
 const logger = winston.createLogger({
     transports: [
@@ -10,5 +11,6 @@ const logger = winston.createLogger({
 });
 
 export const log = (...message: Array<string|number>) => {
-    logger.info(message.join(" "));
+    const flag = globalConfig.ENVIROMENT !== "test";
+    if(flag) logger.info(message.join(" "));
 }

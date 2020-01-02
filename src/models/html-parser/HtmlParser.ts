@@ -1,27 +1,23 @@
 
-import { IProgram, defaultIProgram } from "../program/index";
+import { IProgram, defaultIProgram } from "../program/types";
 
-export class HtmlParserFactory {
-    private site!: CheerioElement;
-    private program!: IProgram;
+export class HtmlParser {
+    private site: CheerioElement;
+    private program: IProgram = defaultIProgram;
 
-    private setSite(site: CheerioElement){
+    constructor(site: CheerioElement){
         this.site = site;
-        this.program = defaultIProgram;
-    }
 
-    private initialize(): void{
         this.getYear();
         this.getInstitution();
         this.getEvaluation();
-        this.getMinister();
+        this.getMinistry();
         this.publicSevice();
-        this.getClasification();
     }
 
     private getYear() {
-        const yearRaw = this.site.children[0].children[0].children[0].children[0].data;
-        const year = yearRaw? parseInt(yearRaw) : 0;
+        const yearRaw = this.getDataFromChild(0, 3, "data");
+        const year = typeof yearRaw === "string"? parseInt(yearRaw, 10) : yearRaw;
         this.program = {
             ...this.program,
             year
@@ -29,48 +25,54 @@ export class HtmlParserFactory {
     }
 
     private getInstitution() {
-        const institution = this.site.children[1].children[0].data || "";
+        const institution = this.getDataFromChild(1, 1, "data");
         this.program = {
             ...this.program,
             institution
         }
     }
 
-    private getEvaluation() {
-        const evaluation = this.site.children[2].children[0].children[0].children[0].data || "";
+    private getMinistry() {
+        const ministry = this.getDataFromChild(3, 3, "data");
         this.program = {
             ...this.program,
-            evaluation
-        }
-    }
-
-    private getMinister() {
-        const minister = this.site.children[3].children[0].children[0].children[0].data || "";
-        this.program = {
-            ...this.program,
-            minister
+            ministry
         }
     }
 
     private publicSevice() {
-        const publicService = this.site.children[4].children[0].children[0].children[0].data || "";
+        const publicService = this.getDataFromChild(4, 3, "data");
         this.program = {
             ...this.program,
             publicService
         }
     }
 
-    private getClasification() {
-        const clasification = this.site.children[5].children[0].children[0].children[0].data || "";
+    private getEvaluation() {
+        const evaluation = this.getDataFromChild(5, 3, "data");
         this.program = {
             ...this.program,
-            clasification
+            evaluation
         }
     }
 
-    public parseHtml(site: CheerioElement) {
-        this.setSite(site);
-        this.initialize();
+    private getDataFromChild(tdIndex: number, childrenDeep: number, key: string): string {
+        const base = this.site.children[tdIndex];
+        if(!base) throw new Error("Column not found.");
+
+        return this.recursiveChildSearch(base, key, childrenDeep, 1);
+    }
+
+    private recursiveChildSearch(column: CheerioElement, key: string, totalChildrenDep: number, childrenDeep: number): string {
+        const columnChild = column.children[0];
+        if(totalChildrenDep !== childrenDeep && columnChild) {
+            return this.recursiveChildSearch(columnChild, key, totalChildrenDep, childrenDeep +1);
+        } else {
+            return (columnChild as any)[key];
+        };
+    }
+
+    public getObject() {
         return this.program;
     }
 }
