@@ -4,8 +4,8 @@ import cheerio from "cheerio";
 import { log } from "../../common/logger/logger";
 import { HtmlParser } from "../html-parser/HtmlParser";
 
-import { Program } from "../program/Program";
-import { IProgram } from "../program/types";
+import { Program } from "../../models/program/Program";
+import { IProgram } from "../../models/program/types";
 import { globalConfig } from "../../config";
 
 export class Scraper {

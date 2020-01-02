@@ -1,6 +1,6 @@
 
 import { globalConfig } from "./config";
-import { Scraper } from "./models/scraper/Scraper";
+import { Scraper } from "./services/scraper/Scraper";
 
 export class App {
     static async init(){

@@ -35,10 +35,10 @@ export class Program {
     }
 
     private cleanMinister(ministryRaw: string): string {
-        const ministryKeysToDelete = ["ministerio", "de", "del", "la"]
+        const ministryKeysToDelete = new Set(["ministerio", "de", "del", "la"]);
         const ministryStringArray = ministryRaw.split(" ").filter((val: string, index: number) => {
             if(index <= 2) {
-                return !ministryKeysToDelete.includes(val.toLocaleLowerCase());
+                return !ministryKeysToDelete.has(val.toLocaleLowerCase());
             } else {
                 return true;
             }

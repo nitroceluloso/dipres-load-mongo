@@ -1,5 +1,5 @@
 
-import { IProgram, defaultIProgram } from "../program/types";
+import { IProgram, defaultIProgram } from "../../models/program/types";
 
 export class HtmlParser {
     private site: CheerioElement;
