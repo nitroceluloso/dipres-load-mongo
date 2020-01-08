@@ -1,12 +1,12 @@
 
 import { Program } from "./Program";
-import { IProgram } from "./types";
+import { RawProgram } from "../raw-program/types";
 
 describe('Program Class', () => {
     test('Initialize', () => {
-        const obj: IProgram = {
+        const obj: RawProgram = {
             evaluation: "asd asd",
-            institution: "",
+            name: "",
             ministry: "",
             publicService: "",
             year: 2

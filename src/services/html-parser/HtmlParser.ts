@@ -1,15 +1,15 @@
 
-import { IProgram, defaultIProgram } from "../../models/program/types";
+import { RawProgram } from "../../models/raw-program/RawProgram";
 
 export class HtmlParser {
     private site: CheerioElement;
-    private program: IProgram = defaultIProgram;
+    private program = new RawProgram();
 
     constructor(site: CheerioElement){
         this.site = site;
 
         this.getYear();
-        this.getInstitution();
+        this.getName();
         this.getEvaluation();
         this.getMinistry();
         this.publicSevice();
@@ -18,42 +18,27 @@ export class HtmlParser {
     private getYear() {
         const yearRaw = this.getDataFromChild(0, 3, "data");
         const year = typeof yearRaw === "string"? parseInt(yearRaw, 10) : yearRaw;
-        this.program = {
-            ...this.program,
-            year
-        }
+        this.program.setYear(year);
     }
 
-    private getInstitution() {
-        const institution = this.getDataFromChild(1, 1, "data");
-        this.program = {
-            ...this.program,
-            institution
-        }
+    private getName() {
+        const name = this.getDataFromChild(1, 1, "data");
+        this.program.setName(name);
     }
 
     private getMinistry() {
         const ministry = this.getDataFromChild(3, 3, "data");
-        this.program = {
-            ...this.program,
-            ministry
-        }
+        this.program.setMinistry(ministry);
     }
 
     private publicSevice() {
         const publicService = this.getDataFromChild(4, 3, "data");
-        this.program = {
-            ...this.program,
-            publicService
-        }
+        this.program.setPublicService(publicService);
     }
 
     private getEvaluation() {
         const evaluation = this.getDataFromChild(5, 3, "data");
-        this.program = {
-            ...this.program,
-            evaluation
-        }
+        this.program.setEvaluation(evaluation);
     }
 
     private getDataFromChild(tdIndex: number, childrenDeep: number, key: string): string {
