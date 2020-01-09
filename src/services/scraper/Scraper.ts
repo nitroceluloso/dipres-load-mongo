@@ -5,8 +5,9 @@ import { log } from "../../common/logger/logger";
 import { HtmlParser } from "../html-parser/HtmlParser";
 
 import { Program } from "../../models/program/Program";
-import { IProgram } from "../../models/program/types";
+import { Program as IProgram } from "../../models/program/types";
 import { globalConfig } from "../../config";
+import { RawProgram } from "../../models/raw-program/RawProgram";
 
 export class Scraper {
     url: string;
@@ -31,13 +32,13 @@ export class Scraper {
             return new HtmlParser(el).getObject();
         });
 
-        const cleanRegisters = registerPlains.filter((el: IProgram) => {
+        const cleanRegisters = registerPlains.filter((el: RawProgram) => {
             return el.year >= globalConfig.MINIMUM_YEAR;
         });
 
         log("Evaluated elements obtained: ", cleanRegisters.length);
 
-        return cleanRegisters.map((el: IProgram) => {
+        return cleanRegisters.map((el: RawProgram) => {
             return new Program(el);
         })
     }

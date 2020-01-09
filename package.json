@@ -10,7 +10,7 @@
   "scripts": {
     "start": "node ./dist/index.js",
     "prestart": "tsc",
-    "dev": "ts-node-dev --respawn ./src/index.ts",
+    "dev": "tsnd --respawn --debug ./src/index.ts",
     "test": "ENVIROMENT=test jest"
   },
   "dependencies": {

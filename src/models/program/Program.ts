@@ -1,54 +1,55 @@
 
-import { IProgram } from "./types";
+import { Ministry } from "../ministry/Ministry";
+import { Evaluation } from "../evaluation/Evaluation";
+import { Evaluation as IEvaluation } from "../evaluation/types";
+import { Ministry as IMinistry } from "../ministry/types";
+
+import { PublicService } from "../public-service/PublicService";
+import { PublicService as IPublicService } from "../public-service/types";
+import { RawProgram } from "../raw-program/types";
+import { strToUnicode } from "../../helpers/parser/strToUnicode/strToUnicode";
 
 export class Program {
 
     year: number;
-    institution: string;
-    evaluation: string;
-    ministry: string;
+    name: string;
+    evaluation: IEvaluation;
+    ministry: IMinistry;
 
-    publicService: string;
+    publicService: IPublicService;
+    code: number;
 
-    constructor(obj: IProgram) {
-        this.year = this.parseYear(obj);
-        this.institution = this.parseInstitution(obj);
-        this.ministry = this.parseMinistry(obj);
-        this.publicService = this.parsePublicService(obj);
-        this.evaluation = this.parseEvaluation(obj);
+    constructor(obj: RawProgram) {
+        this.year = this.setYear(obj);
+        this.name = this.setName(obj);
+        this.ministry = this.setMinistry(obj);
+        this.publicService = this.setPublicService(obj);
+        this.evaluation = this.setEvaluation(obj);
+        this.code = this.setCode();
     }
 
-    private parseYear(obj: IProgram): number {
+    private setYear(obj: RawProgram): number {
         return obj.year;
     }
 
-    private parseInstitution(obj: IProgram): string {
-        return obj.institution;
+    private setName(obj: RawProgram): string {
+        return obj.name;
     }
 
-    private parseEvaluation(obj: IProgram): string {
-        return obj.evaluation.split(" ")[1].toLowerCase();
+    private setEvaluation(obj: RawProgram): IEvaluation  {
+        return new Evaluation(obj.evaluation);
     }
 
-    private parseMinistry(obj: IProgram): string {
-        return this.cleanMinister(obj.ministry);
+    private setMinistry(obj: RawProgram): IMinistry {
+        return new Ministry(obj.ministry);
     }
 
-    private cleanMinister(ministryRaw: string): string {
-        const ministryKeysToDelete = new Set(["ministerio", "de", "del", "la"]);
-        const ministryStringArray = ministryRaw.split(" ").filter((val: string, index: number) => {
-            if(index <= 2) {
-                return !ministryKeysToDelete.has(val.toLocaleLowerCase());
-            } else {
-                return true;
-            }
-        });
-
-        return ministryStringArray.join(" ");
+    private setPublicService(obj: RawProgram): IPublicService {
+        return new PublicService(obj.publicService);
     }
 
-    private parsePublicService(obj: IProgram): string {
-        return obj.publicService;
+    private setCode() {
+        return strToUnicode(this.name);
     }
 
 }

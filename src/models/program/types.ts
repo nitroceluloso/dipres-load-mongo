@@ -1,16 +1,13 @@
 
-export interface IProgram {
-    year: number;
-    institution: string;
-    evaluation: string;
-    ministry: string;
-    publicService: string;
-}
+import { Evaluation } from "../evaluation/types";
+import { Ministry } from "../ministry/types";
+import { PublicService } from "../public-service/types";
 
-export const defaultIProgram: IProgram = {
-    year: 0,
-    institution: "",
-    evaluation: "",
-    ministry: "",
-    publicService: ""
+export interface Program {
+    code?: number;
+    year: number;
+    name: string;
+    evaluation: Evaluation;
+    ministry: Ministry;
+    publicService: PublicService;
 }

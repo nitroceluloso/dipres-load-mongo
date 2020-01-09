@@ -1,12 +1,11 @@
 
 import { Program } from "./Program";
-import { IProgram } from "./types";
 
 describe('Program Class', () => {
     test('Initialize', () => {
-        const obj: IProgram = {
-            evaluation: "asd asd",
-            institution: "",
+        const obj = {
+            evaluation: "desempeño medio",
+            name: "",
             ministry: "",
             publicService: "",
             year: 2

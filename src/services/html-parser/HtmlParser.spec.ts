@@ -76,11 +76,7 @@ const mockSite = () => {
                             {
                                 children: [
                                     {
-                                        children: [
-                                            {
-                                                data: 2018
-                                            }
-                                        ]
+                                        data: "desempeño medio"
                                     }
                                 ]
                             }

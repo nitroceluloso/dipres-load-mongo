@@ -15,6 +15,7 @@ module.exports = {
         "types.ts",
         "config.ts",
         "App.ts",
-        "index.ts"
+        "index.ts",
+        ".schema.ts"
     ]
 }
