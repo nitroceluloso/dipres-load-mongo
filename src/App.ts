@@ -32,5 +32,7 @@ class App {
 export const main = async () => {
     await App.config();
     const list = await App.scrap();
-    App.updateDb(list)
+    await App.updateDb(list)
+    process.exit();
+
 }

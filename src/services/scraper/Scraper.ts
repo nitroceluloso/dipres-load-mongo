@@ -29,7 +29,7 @@ export class Scraper {
     parseToProgram(rows: Array<any>): Array<Program> {
         log("Total elements obtained: ", rows.length);
         const registerPlains = rows.map((el) => {
-            return new HtmlParser(el).getObject();
+            return new HtmlParser(el).getProgram();
         });
 
         const cleanRegisters = registerPlains.filter((el: RawProgram) => {
