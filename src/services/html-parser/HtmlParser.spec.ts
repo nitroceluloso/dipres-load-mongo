@@ -98,6 +98,6 @@ describe('Html Parser', () => {
     test('return site', () => {
         const mock = mockSite() as never;
         const obj = new HtmlParser(mock);
-        expect(obj.getObject()).toBeDefined();
+        expect(obj.getProgram()).toBeDefined();
     });
 });

@@ -1,5 +1,6 @@
 
 import { RawProgram } from "../../models/raw-program/RawProgram";
+import { recursiveChildSearch } from "../../helpers/filters/childSearchRecursive/childSearchRecursive";
 
 export class HtmlParser {
     private site: CheerioElement;
@@ -45,19 +46,10 @@ export class HtmlParser {
         const base = this.site.children[tdIndex];
         if(!base) throw new Error("Column not found.");
 
-        return this.recursiveChildSearch(base, key, childrenDeep, 1);
+        return recursiveChildSearch(base, key, childrenDeep, 1);
     }
 
-    private recursiveChildSearch(column: CheerioElement, key: string, totalChildrenDep: number, childrenDeep: number): string {
-        const columnChild = column.children[0];
-        if(totalChildrenDep !== childrenDeep && columnChild) {
-            return this.recursiveChildSearch(columnChild, key, totalChildrenDep, childrenDeep +1);
-        } else {
-            return (columnChild as any)[key];
-        };
-    }
-
-    public getObject() {
+    public getProgram() {
         return this.program;
     }
 }
