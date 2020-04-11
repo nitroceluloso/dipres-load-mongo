@@ -1,5 +1,5 @@
 
-import { strToUnicode } from "../../helpers/parser/strToUnicode/strToUnicode";
+import { strToUnicode } from "../../helper/parser/string-to-unicode/stringToUnicode";
 
 export class PublicService {
     name: string;

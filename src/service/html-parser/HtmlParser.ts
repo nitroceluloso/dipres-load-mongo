@@ -1,6 +1,6 @@
 
-import { RawProgram } from "../../models/raw-program/RawProgram";
-import { recursiveChildSearch } from "../../helpers/filters/childSearchRecursive/childSearchRecursive";
+import { RawProgram } from "../../model/raw-program/RawProgram";
+import { recursiveChildSearch } from "../../helper/filter/child-search-recursive/childSearchRecursive";
 
 export class HtmlParser {
     private site: CheerioElement;

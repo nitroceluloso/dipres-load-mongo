@@ -1,18 +1,22 @@
 
-import mongoose from "mongoose"
+import mongoose from "mongoose";
 import { globalConfig } from "./config";
-import { Scraper } from "./services/scraper/Scraper";
-import { Program } from "./models/program/Program";
+import { Scraper } from "./service/scraper/Scraper";
+import { Program } from "./model/program/Program";
 
-import { Ministries } from "./services/ministries/Ministries";
-import { PublicServices } from "./services/public-services/PublicServices";
-import { Programs } from "./services/programs/Programs";
+import { Ministries } from "./service/ministry/Ministry.service";
+import { PublicServices } from "./service/public-service/PublicService.service";
+import { Programs } from "./service/program/Program.service";
 
 class App {
 
     static async config() {
         if(globalConfig.ENVIROMENT === "develop") mongoose.set('debug', true);
-        await mongoose.connect(globalConfig.MONGO_URI, { useNewUrlParser: true });
+        const mongoOptions = {
+            useNewUrlParser: true,
+            useUnifiedTopology: true
+        }
+        await mongoose.connect(globalConfig.MONGO_URI, mongoOptions);
     }
 
     static async scrap() {

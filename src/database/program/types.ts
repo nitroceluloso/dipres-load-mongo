@@ -1,5 +1,5 @@
 
 import { Document } from "mongoose";
-import { Program } from "../../models/program/types";
+import { Program } from "../../model/program/types";
 
 export interface ProgramDocument extends Program, Document {}

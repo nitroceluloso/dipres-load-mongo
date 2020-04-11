@@ -1,5 +1,5 @@
 
-import { Ministry } from "../ministry/Ministry";
+import { Ministry } from "../ministry/Ministry.model.";
 import { Evaluation } from "../evaluation/Evaluation";
 import { Evaluation as IEvaluation } from "../evaluation/types";
 import { Ministry as IMinistry } from "../ministry/types";
@@ -7,7 +7,7 @@ import { Ministry as IMinistry } from "../ministry/types";
 import { PublicService } from "../public-service/PublicService";
 import { PublicService as IPublicService } from "../public-service/types";
 import { RawProgram } from "../raw-program/types";
-import { strToUnicode } from "../../helpers/parser/strToUnicode/strToUnicode";
+import { strToUnicode } from "../../helper/parser/string-to-unicode/stringToUnicode";
 
 export class Program {
 

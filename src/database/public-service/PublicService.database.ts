@@ -1,6 +1,6 @@
 
 import PublicServiceSchema from "./PublicService.schema";
-import { PublicService } from "../../models/public-service/types";
+import { PublicService } from "../../model/public-service/types";
 
 export class PublicServiceDatabase {
 

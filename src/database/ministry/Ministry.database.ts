@@ -1,6 +1,6 @@
 
 import MinistrySchema from "./Ministry.schema";
-import { Ministry } from "../../models/ministry/types";
+import { Ministry } from "../../model/ministry/types";
 
 export class MinistryDatabase {
 

@@ -1,5 +1,5 @@
 
-import { strToUnicode } from "../../parser/strToUnicode/strToUnicode";
+import { strToUnicode } from "../../parser/string-to-unicode/stringToUnicode";
 
 export const getUniqueElements = <T, R>(list: Array<T>, resource: string, key: string): Map<number, R> => {
 

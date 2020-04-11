@@ -1,9 +1,9 @@
 
-import { Program } from "../../models/program/Program";
-import { Program as IProgram } from "../../models/program/types";
-import { Ministry } from "../../models/ministry/types";
-import { PublicService } from "../../models/public-service/types";
-import { arrayToMap } from "../../helpers/parser/arrayToMap/arrayToMap";
+import { Program } from "../../model/program/Program";
+import { Program as IProgram } from "../../model/program/types";
+import { Ministry } from "../../model/ministry/types";
+import { PublicService } from "../../model/public-service/types";
+import { arrayToMap } from "../../helper/parser/array-to-map/arrayToMap";
 import { ProgramDatabase } from "../../database/program/Program.database";
 import { log } from "../../common/logger/logger";
 

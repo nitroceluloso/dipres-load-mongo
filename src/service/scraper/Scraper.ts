@@ -4,10 +4,10 @@ import cheerio from "cheerio";
 import { log } from "../../common/logger/logger";
 import { HtmlParser } from "../html-parser/HtmlParser";
 
-import { Program } from "../../models/program/Program";
-import { Program as IProgram } from "../../models/program/types";
+import { Program } from "../../model/program/Program";
+import { Program as IProgram } from "../../model/program/types";
 import { globalConfig } from "../../config";
-import { RawProgram } from "../../models/raw-program/RawProgram";
+import { RawProgram } from "../../model/raw-program/RawProgram";
 
 export class Scraper {
     url: string;
@@ -28,18 +28,12 @@ export class Scraper {
 
     parseToProgram(rows: Array<any>): Array<Program> {
         log("Total elements obtained: ", rows.length);
-        const registerPlains = rows.map((el) => {
-            return new HtmlParser(el).getProgram();
-        });
+        const registerPlains = rows.map((el) => new HtmlParser(el).getProgram());
 
-        const cleanRegisters = registerPlains.filter((el: RawProgram) => {
-            return el.year >= globalConfig.MINIMUM_YEAR;
-        });
+        const cleanRegisters = registerPlains.filter((el: RawProgram) => el.year >= globalConfig.MINIMUM_YEAR);
 
         log("Evaluated elements obtained: ", cleanRegisters.length);
 
-        return cleanRegisters.map((el: RawProgram) => {
-            return new Program(el);
-        })
+        return cleanRegisters.map((el: RawProgram) => new Program(el))
     }
 }

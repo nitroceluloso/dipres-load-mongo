@@ -1,11 +1,11 @@
 
-import { Program } from "../../models/program/Program";
-import { getUniqueElements } from "../../helpers/filters/getUniqueElements/getUniqueElements";
-import { arrayToMap } from "../../helpers/parser/arrayToMap/arrayToMap";
-import { getNewDiffElements } from "../../helpers/filters/getNewDiffElements/getNewDiffElements";
+import { Program } from "../../model/program/Program";
+import { getUniqueElements } from "../../helper/filter/unique-element/uniqueElement";
+import { arrayToMap } from "../../helper/parser/array-to-map/arrayToMap";
+import { getNewDiffElements } from "../../helper/filter/diff-element/diffElement";
 
 import { PublicServiceDatabase } from "../../database/public-service/PublicService.database";
-import { PublicService } from "../../models/public-service/types";
+import { PublicService } from "../../model/public-service/types";
 import { log } from "../../common/logger/logger";
 
 

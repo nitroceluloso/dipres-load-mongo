@@ -1,6 +1,6 @@
 
 import ProgramSchema from "./Program.schema";
-import { Program } from "../../models/program/types";
+import { Program } from "../../model/program/types";
 
 export class ProgramDatabase {
 
